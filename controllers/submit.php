@@ -89,7 +89,7 @@ class Submit extends Controller {
         $user_problems[$problem_id] = true;
         
         // Now we have to check if the user has passed of section, i.e it was
-        // the last problem to be solved in this task
+        // the last problem to be solved in this section
         $problem_model = $this->loadModel('Problem');
         $problems_ids  = $problem_model->getIdsFromProblemsMandatories($section_id);
         
@@ -153,8 +153,7 @@ class Submit extends Controller {
   function compile_submission($code, $language, $problem_id) {
     $submission_path = SUBMISSION_PATH . Session::get('user_id') . '/' . $problem_id . '/';
     
-    file_put_contents($submission_path . 'source' . $this->get_extension($language), $code);
-    Session::set('debug', $submission_path); 
+    file_put_contents($submission_path . 'source' . $this->get_extension($language), $code);     
     $compile_cmd = str_replace('[PATH]', $submission_path, $this->get_compile_cmd($language)) . ' 2>&1';
     
     // retval = 1 if some error ocurred, retval = 0 otherwise
@@ -165,7 +164,9 @@ class Submit extends Controller {
       $compile_result .= str_replace($submission_path, '', $v) . "\n";
     }
     
-    //unlink($submission_path . 'source' . $this->get_extension($language));
+    // Remove source code 
+    unlink($submission_path . 'source' . $this->get_extension($language));
+    // Put the compile result at compile file
     file_put_contents($submission_path . 'compile', $compile_result);
     return $retval;
   }

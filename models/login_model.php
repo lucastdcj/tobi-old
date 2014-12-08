@@ -88,8 +88,8 @@ class LoginModel {
       $problems_array = array();
       foreach ($problems_solved as $key => $value) {      	
       	$problems_array[$value->problem_id] = true;      
-      }     
-      $result->section_id = max($result->section, 1); 
+      }   
+       
       // login process, write the user data into session
       Session::init();
       Session::set('user_logged_in', true);
