@@ -52,12 +52,7 @@ class Submit extends Controller {
     $submit_model = $this->loadModel('Submit');
     
     $submission_path = SUBMISSION_PATH . Session::get('user_id') . '/' . $problem_id . '/';
-    Session::set('debug',$submission_path);
     if (!is_dir($submission_path)) {
-      Session::set('debug2','entrou');
-      mkdir(SUBMISSION_PATH . Session::get('user_id') . '/' );
-      chmod(SUBMISSION_PATH . Session::get('user_id') . '/' , 0777);
-
       mkdir($submission_path);
       chmod($submission_path, 0777);
     }

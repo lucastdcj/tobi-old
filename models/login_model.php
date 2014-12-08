@@ -453,8 +453,8 @@ class LoginModel {
       $user_creation_timestamp = time();
       
       // write new users data into database
-      $sql   = "INSERT INTO users (user_name, user_password_hash, user_email, user_creation_timestamp, user_activation_hash, user_provider_type)
-                    VALUES (:user_name, :user_password_hash, :user_email, :user_creation_timestamp, :user_activation_hash, :user_provider_type)";
+      $sql   = "INSERT INTO users (user_name, user_password_hash, user_email, user_creation_timestamp, user_activation_hash, user_provider_type, section_id)
+                    VALUES (:user_name, :user_password_hash, :user_email, :user_creation_timestamp, :user_activation_hash, :user_provider_type, :section_id)";
       $query = $this->db->prepare($sql);
       $query->execute(array(
         ':user_name' => $user_name,
@@ -462,7 +462,8 @@ class LoginModel {
         ':user_email' => $user_email,
         ':user_creation_timestamp' => $user_creation_timestamp,
         ':user_activation_hash' => $user_activation_hash,
-        ':user_provider_type' => 'DEFAULT'
+        ':user_provider_type' => 'DEFAULT',
+        ':section_id' => 1 
       ));
       $count = $query->rowCount();
       if ($count != 1) {
@@ -485,6 +486,9 @@ class LoginModel {
       // send verification email, if verification email sending failed: instantly delete the user
       if ($this->sendVerificationEmail($user_id, $user_email, $user_activation_hash)) {
         $_SESSION["feedback_positive"][] = FEEDBACK_ACCOUNT_SUCCESSFULLY_CREATED;
+	// Create a new directory in submission path to this user
+	mkdir(SUBMISSION_PATH . $user_id . '/' );
+      	chmod(SUBMISSION_PATH . $user_id . '/' , 0777);
         return true;
       } else {
         $query = $this->db->prepare("DELETE FROM users WHERE user_id = :last_inserted_id");
