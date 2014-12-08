@@ -1,0 +1,48 @@
+<div class = "leftmenu">
+  <ul>
+    <?php	        
+      if ($this->problems) {
+          $has_extra = false;
+          echo '<li class="problemtype"> Problemas Obrigatórios </li>';
+          $user_problems = Session::get('user_problems');
+          $user_section_id = Session::get('section_id');
+          
+          foreach($this->problems as $key => $value) {		    	
+          	if (!$value->problem_extra) {		    	  
+          	  echo (isset($user_problems[$value->problem_id])) ? '<li class="finished">' : '<li>';
+          	  echo '<a href="' . URL .'problem/show/' . $this->section_id . '/' . $value->problem_abbr . '">';
+          	  echo '<img src="' . URL . 'public/img/icon_problem.png" alt="Ver Problema" style="padding-right: 5px; padding-left:5px">';
+          	  echo '</a>';
+          	  if ($user_section_id >= $this->section_id) {
+          	    echo '<img src="' . URL . 'public/img/icon_submit.png" alt ="Submeter Problema" style="padding-right: 5px">';
+          	  } else {
+          	    echo '<img src="' . URL . 'public/img/icon_submit_gray.png" alt ="Submeter Problema" style="padding-right: 5px">';	  
+          	  }
+          	  
+          	  if (isset($user_problems[$value->problem_id])) {
+          	    echo '<img src="' . URL . 'public/img/icon_solution.png" alt="Solução do Problema" style="padding-right: 5px">';
+          	  } else {
+          	    echo '<img src="' . URL . 'public/img/icon_solution_gray.png" alt="Solução do Problema" style="padding-right: 5px">';
+          	  }
+          	  echo $value->problem_name;			  
+      	  echo '</li>';
+              } else {
+                $has_extra = true;	
+              }
+          }
+          
+          if ($has_extra) {
+            echo '<li class="problemtype"> Problemas Sugeridos </li>';	    
+          }
+          
+          foreach($this->problems as $key => $value) {
+          	if ($value->problem_extra) {
+          	  echo (isset($user_problems[$value->problem_id])) ? '<li class="finished">' : '<li>';
+          	  echo $value->problem_name;			  
+      	  echo '</li>';
+              }
+          }
+      }		
+    ?>
+  </ul>
+</div>
