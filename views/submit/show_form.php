@@ -3,7 +3,15 @@
   <?php require VIEWS_PATH . '_templates/leftmenu.php'; ?>
   <div class = "main">
     <div class = "textarea">
-      <?php $this->renderFeedbackMessages(); ?>     
+      <?php 
+      	$this->renderFeedbackMessages();
+      	$compilation_msg = Session::get('compilation_msg');
+      	if (isset($compilation_msg)) {
+      	  echo $compilation_msg;
+      	  Session::set('compilation_msg',null);
+      	}      	
+      	
+      ?>     
       <h1 align="center"> Hora da verdade! </h1>
       <form action="<?php echo URL; ?>submit/test_code/<?php echo $this->section_id . '/' . $this->problem_id ?>"
         method="POST" enctype="multipart/form-data">

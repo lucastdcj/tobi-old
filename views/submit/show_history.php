@@ -55,7 +55,7 @@ function convert_language($id) {
   <?php require VIEWS_PATH . '_templates/leftmenu.php'; ?>
   <div class = "main">
     <div class = "textarea">
-      <?php $this->renderFeedbackMessages(); ?>     
+      <?php $this->renderFeedbackMessages();?>      
       <h1 align="center"> Últimas Submissões </h1>
       <table width ="100%">
       	<tr class="historyhead">      	  

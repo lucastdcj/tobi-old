@@ -17,7 +17,7 @@ class SubmitModel {
     $code_source = $_POST['code_source'];
     $language = $_POST['language'];
     
-    // For all these cases we don't register at DB
+    // For all these cases we don't register in DB
     if (empty($code_source)) {
       $_SESSION["feedback_negative"][] = FEEDBACK_SOURCE_FILE_FIELD_EMPTY;
       return false;

@@ -61,7 +61,7 @@ class Submit extends Controller {
     $compile_error = $this->compile_submission($_POST['code_source'], $language, $problem_id);
     
     if ($compile_error) {
-      $status     = COMPILATION_ERROR;      
+      $status     = COMPILATION_ERROR;       
     } else {      
       $result = $this->run_submission($problem_id, $language);
       $status     = $result['status'];
@@ -167,7 +167,8 @@ class Submit extends Controller {
     // Remove source code 
     unlink($submission_path . 'source' . $this->get_extension($language));
     // Put the compile result at compile file
-    file_put_contents($submission_path . 'compile', $compile_result);
+    Session::set('compilation_msg', $compile_result);
+    // file_put_contents($submission_path . 'compile', $compile_result);
     return $retval;
   }
   

@@ -13,14 +13,13 @@ class RankingModel {
   }
   
   public function getUsersOrdered() {
-  	  
-        
+         
     $sql   = "SELECT user_id, user_name, section_id FROM users ORDER BY section_id DESC";
     $query = $this->db->prepare($sql);
     $query->execute();
-    $x = $query->fetchAll();
+    $all_users = $query->fetchAll();
     $ans = array();
-    foreach ($x as $key => $val) {
+    foreach ($all_users as $key => $val) {
     	$ans[$val->user_id]['user_name'] = $val->user_name;
     	$ans[$val->user_id]['section_id'] = $val->section_id;
 	$ans[$val->user_id]['problems'] = 0;    	
@@ -28,10 +27,13 @@ class RankingModel {
     $sql   = "SELECT user_id, COUNT(DISTINCT problem_id) AS problems FROM problem_user GROUP BY user_id ";
     $query = $this->db->prepare($sql);
     $query->execute();
-    $x = $query->fetchAll();
-    
-    foreach ($x as $key => $val) {
-	$ans[$val->user_id]['problems'] = max($val->problems,0);    	
+    $all_users = $query->fetchAll();
+        
+    foreach ($all_users as $key => $val) {
+      // Verify if user still exists
+      if (isset($ans[$val->user_id])) {
+        $ans[$val->user_id]['problems'] = max($val->problems,0);
+      }
     }
     
     return $ans;
