@@ -1,6 +1,6 @@
 <div class="content">
     <h1 align="center"> Classificação </h1>
-      <table width ="70%">
+      <table class="ranking">
       	<tr class="historyhead">      	  
       	  <td> Usuário </td>
       	  <td> Seção </td>
