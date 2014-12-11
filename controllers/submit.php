@@ -124,7 +124,9 @@ class Submit extends Controller {
   function get_compile_cmd($language) {
     switch ($language) {
       case CPP:
-        return 'g++ [PATH]source.cpp -o [PATH]source';
+        return 'g++ -lm -lcrypt -O2 -pipe -DONLINE_JUDGE -O2 [PATH]source.cpp -o [PATH]source';
+      case C:
+        return 'gcc -lm -lcrypt -O2 -pipe -ansi -DONLINE_JUDGE  [PATH]source.c -o [PATH]source';
     }
   }
   
@@ -132,6 +134,8 @@ class Submit extends Controller {
     switch ($language) {
       case CPP:
         return '.cpp';
+      case C:
+        return '.c';
     }
   }
   
@@ -139,6 +143,9 @@ class Submit extends Controller {
     switch ($language) {
       case CPP:
         return './[PATH]source';
+      case C:
+        return './[PATH]source';
+  
     }
   }
   
