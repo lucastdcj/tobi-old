@@ -34,8 +34,10 @@
           	  } else {
           	    echo '<img src="' . URL . 'public/img/icons/solution_gray.png" title="Solução do Problema">';
           	  }
-          	  
+                            	  
+          	  echo '<a href="' . URL .'problem/show/' . $this->section_id . '/' . $value->problem_id . '">';
           	  echo $value->problem_name;			  
+                  echo '</a>';
           	  echo '</li>';
               } else {
                 $has_extra = true;	
@@ -47,7 +49,7 @@
           }
           
           foreach($this->problems as $key => $value) {
-          	if ($value->problem_extra) {
+          	if ($value->problem_extra == 1) {
           	  echo (isset($user_problems[$value->problem_id])) ? '<li class="finished">' : '<li>';
           	  echo '<a href="' . URL .'problem/show/' . $this->section_id . '/' . $value->problem_id . '">';
           	  echo '<img src="' . URL . 'public/img/icons/problem.png" title="Ver Problema">';
@@ -73,8 +75,10 @@
           	  } else {
           	    echo '<img src="' . URL . 'public/img/icons/solution_gray.png" title="Solução do Problema">';
           	  }
-          	  
+           	  echo '<a href="' . URL .'problem/show/' . $this->section_id . '/' . $value->problem_id . '">';
           	  echo $value->problem_name;			  
+                  echo '</a>';
+          	  
           	  echo '</li>';
               }
           }

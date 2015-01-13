@@ -12,7 +12,10 @@
         </i></center>
         <h1 align="center"> <?php echo $this->problem_data->problem_name ?> </h1>
     	<?php
-    	  include PROBLEMS_PATH . $this->problem_id . '/statement.php';    	  
+          $file_path = PROBLEMS_PATH . $this->problem_id . '/statement.php';  
+          if (file_exists($file_path)) {
+       	    include $file_path;
+          }    	  
     	?>
       </div>
     </div>

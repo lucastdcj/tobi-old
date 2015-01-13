@@ -65,7 +65,7 @@
                 <a href="#" title = "Introdução a Técnicas de Algoritmos">Capítulo 3</a>
                 <ul class="sub-menu">
                   <li <?php if (Session::get('section_id') >= 10) { echo 'class = "finished"';} ?>>
-                    <a href="<?php echo URL; ?>section/show/9">3.1 - Ad-Hoc</a>
+                    <a href="<?php echo URL; ?>section/show/9">3.1 - Ad-Hoc &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                   </li>
                   <li <?php if (Session::get('section_id') >= 11) { echo 'class = "finished"';} ?>>
                     <a href="<?php echo URL; ?>section/show/10">3.2 - Guloso</a>

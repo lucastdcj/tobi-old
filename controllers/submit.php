@@ -174,7 +174,9 @@ class Submit extends Controller {
     // Remove source code 
     unlink($submission_path . 'source' . $this->get_extension($language));
     // Put the compile result at compile file
-    Session::set('compilation_msg', $compile_result);
+    if ($retval) {
+      Session::set('compilation_msg', $compile_result);
+    }
     // file_put_contents($submission_path . 'compile', $compile_result);
     return $retval;
   }
