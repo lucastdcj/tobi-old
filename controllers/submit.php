@@ -84,37 +84,37 @@ class Submit extends Controller {
       if (!isset($user_problems[$problem_id])) {
         
         // First we update that this user solved this problem
-        Session::setArray('user_problems', $problem_id);
+        Session::setArray('user_problems', $problem_id);        
         $submit_model->addProblemUser($problem_id);
         $user_problems[$problem_id] = true;
+      }
+
+      // Now we have to check if the user has passed of section, i.e it was
+      // the last problem to be solved in this section
+      $problem_model = $this->loadModel('Problem');
+      $problems_ids  = $problem_model->getIdsFromProblemsMandatories($section_id);
         
-        // Now we have to check if the user has passed of section, i.e it was
-        // the last problem to be solved in this section
-        $problem_model = $this->loadModel('Problem');
-        $problems_ids  = $problem_model->getIdsFromProblemsMandatories($section_id);
-        
-        $section_advanced = true;
-        $is_mandatory     = false;
-        foreach ($problems_ids as $key => $value) {
-          // Check if it was a mandatory problem
-          if ($value->problem_id == $problem_id) {
-            $is_mandatory = true;
-          }
-          
-          // Check if exists a mandatory problem unset	 
-          if (!isset($user_problems[$value->problem_id])) {
-            $section_advanced = false;
-            break;
-          }
+      $section_advanced = true;
+      $is_mandatory     = false;
+      foreach ($problems_ids as $key => $value) {
+        // Check if it was a mandatory problem
+        if ($value->problem_id == $problem_id) {
+          $is_mandatory = true;
         }
-        
-        if ($section_advanced && $is_mandatory) {
-          $section_model   = $this->loadModel('Section');
-          $user_section_id = Session::get('section_id') + 1;
-          Session::set('section_id', $user_section_id);
-          $section_model->updateUserSection($user_section_id);
+          
+        // Check if exists a mandatory problem unset	 
+        if (!isset($user_problems[$value->problem_id])) {
+          $section_advanced = false;
+          break;
         }
       }
+        
+      if ($section_advanced && $is_mandatory) {
+        $section_model   = $this->loadModel('Section');
+        $user_section_id = max($section_id + 1, Session::get('section_id'));
+        Session::set('section_id', $user_section_id);
+        $section_model->updateUserSection($user_section_id);
+      }      
     }
     
     // After the code run show the history for that problem
@@ -192,7 +192,7 @@ class Submit extends Controller {
    *
    * @return int The verdict.
    */
-  function run_submission($problem_id,  $language, $time_limit = 1.0, $memory_limit = 256) {
+  function run_submission($problem_id,  $language, $time_limit = 2.5, $memory_limit = 256) {
         
     $grader_path     = MOE_BOX_PATH;
     $submission_path = SUBMISSION_PATH . Session::get('user_id') . '/' . $problem_id . '/';
@@ -253,7 +253,7 @@ class Submit extends Controller {
       } else if (isset($run_result['status'])) {
         $status = OTHER_ERROR; 
       } else {
-        $diff_cmd = 'diff -q ' . $output_path . 'out' . $test . ' ' . $submission_path . 'out' . $test . ' > ' . $submission_path . 'diff';
+        $diff_cmd = 'diff -b -q ' . $output_path . 'out' . $test . ' ' . $submission_path . 'out' . $test . ' > ' . $submission_path . 'diff';
         
         exec($diff_cmd, $output, $retval);
         $diff = file_get_contents($submission_path . 'diff');

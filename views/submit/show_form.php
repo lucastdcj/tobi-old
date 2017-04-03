@@ -20,9 +20,6 @@
           <option value="0" selected>Selecione... </option>
           <option value="1">C</option>
           <option value="2">C++</option>
-          <option value="3">Pascal</option>
-          <option value="4">Python</option>
-         <option value="5">Java</option>
         </select>
         <h2> Código:</h2>
         <textarea  id ="code_source" name="code_source"></textarea>        

@@ -46,23 +46,22 @@
                 </ul>
             </li>
             
-            <li>
-                <a href="#" title = "Estrutura de Dados I">Capítulo 2</a>
-                <ul class="sub-menu">
-                  <li <?php if (Session::get('section_id') >= 7) { echo 'class = "finished"';} ?>>
-                    <a href="<?php echo URL; ?>section/show/6">2.1 - Pilha e Fila</a>
-                  </li>
-                  <li <?php if (Session::get('section_id') >= 8) { echo 'class = "finished"';} ?>>
-                    <a href="<?php echo URL; ?>section/show/7">2.2 -Set e Map</a>
-                  </li>
-                  <li <?php if (Session::get('section_id') >= 9) { echo 'class = "finished"';} ?>>
-                    <a href="<?php echo URL; ?>section/show/8">2.3 - STL++</a>
-                  </li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="#" title = "Introdução a Técnicas de Algoritmos">Capítulo 3</a>
+            <li <?php if (Session::get('user_logged_in') == true && Session::get('section_id') >= 10) { echo 'class = "finished"';} ?>>
+                <a href="#" title = "Estrutura de Dados I"><font color="green">Capítulo 2</font></a>
+               <ul class="sub-menu">
+                 <li <?php if (Session::get('section_id') >= 7) { echo 'class = "finished"';} ?>>
+                   <a href="<?php echo URL; ?>section/show/6">2.1 - Pilha e Fila</a>
+                 </li>
+                 <li <?php if (Session::get('section_id') >= 8) { echo 'class = "finished"';} ?>>
+                   <a href="<?php echo URL; ?>section/show/7">2.2 -Set e Map</a>
+                 </li>
+                 <li <?php if (Session::get('section_id') >= 9) { echo 'class = "finished"';} ?>>
+                   <a href="<?php echo URL; ?>section/show/8">2.3 - STL++</a>
+                 </li>
+               </ul>
+           </li> 
+            <li <?php if (Session::get('user_logged_in') == true && Session::get('section_id') >= 15) { echo 'class = "finished"';} ?>>
+                <a href="#" title = "Introdução a Técnicas de Algoritmos"><font color="blue">Capítulo 3</font></a>
                 <ul class="sub-menu">
                   <li <?php if (Session::get('section_id') >= 10) { echo 'class = "finished"';} ?>>
                     <a href="<?php echo URL; ?>section/show/9">3.1 - Ad-Hoc &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
@@ -83,8 +82,8 @@
                 </ul>
             </li>
             
-            <li>
-                <a href="#" title = "Grafos - Parte I">Capítulo 4</a>
+            <li <?php if (Session::get('user_logged_in') == true && Session::get('section_id') >= 19) { echo 'class = "finished"';} ?>>
+                <a href="#" title = "Grafos - Parte I"><font color="#a0a">Capítulo 4</font></a>
                 <ul class="sub-menu">
                   <li <?php if (Session::get('section_id') >= 15) { echo 'class = "finished"';} ?>>
                     <a href="<?php echo URL; ?>section/show/14">4.1 - Representação e Definição de Grafos</a>
@@ -101,8 +100,8 @@
                 </ul>
             </li>
             
-            <li>
-                <a href="#" title = "Grafos - Parte II">Capítulo 5</a>
+            <li <?php if (Session::get('user_logged_in') == true && Session::get('section_id') >= 22) { echo 'class = "finished"';} ?>>
+                <a href="#" title = "Grafos - Parte II"><font color="#FF8C00"> Capítulo 5</font></a>
                 <ul class="sub-menu">
                   <li <?php if (Session::get('section_id') >= 19) { echo 'class = "finished"';} ?>>
                     <a href="<?php echo URL; ?>section/show/18">5.1 - Árvore Geradora Mínima</a>
@@ -116,8 +115,8 @@
                 </ul>
             </li>
             
-             <li>
-                <a href="#" title = "Matemática">Capítulo 6</a>
+             <li <?php if (Session::get('user_logged_in') == true && Session::get('section_id') >= 26) { echo 'class = "finished"';} ?>>
+                <a href="#" title = "Matemática"><font color="red">Capítulo 6</font></a>
                 <ul class="sub-menu">
                   <li <?php if (Session::get('section_id') >= 22) { echo 'class = "finished"';} ?>>
                     <a href="<?php echo URL; ?>section/show/21">6.1 - Teoria dos Números</a>

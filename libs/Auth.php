@@ -38,7 +38,7 @@ class Auth {
         Auth::handleLogin();
         
         $user_section_id = Session::get('section_id');
-        if (!($user_section_id >= $section_id)) {
+        if (!($user_section_id >= $section_id || $user_section_id >= 25)) {
           header('location: ' . URL . 'index');
           exit();
         }

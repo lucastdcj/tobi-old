@@ -7,7 +7,7 @@
           $user_problems = Session::get('user_problems');
           $user_section_id = Session::get('section_id');
           
-          foreach($this->problems as $key => $value) {		    	
+          foreach($this->problems as $key => $value) {		    
           	if (!$value->problem_extra) {		    	  
           	  echo (isset($user_problems[$value->problem_id])) ? '<li class="finished">' : '<li>';
           	  echo '<a href="' . URL .'problem/show/' . $this->section_id . '/' . $value->problem_id . '">';
@@ -49,6 +49,8 @@
           }
           
           foreach($this->problems as $key => $value) {
+                // Skip bug problem.
+                if ($value->problem_id == 102) continue;
           	if ($value->problem_extra == 1) {
           	  echo (isset($user_problems[$value->problem_id])) ? '<li class="finished">' : '<li>';
           	  echo '<a href="' . URL .'problem/show/' . $this->section_id . '/' . $value->problem_id . '">';

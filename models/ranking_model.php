@@ -24,10 +24,27 @@ class RankingModel {
     $query->execute();
     $all_users = $query->fetchAll();
     $ans = array();
+
+    $last_section_id = 0;
+    $last_problems = 0;
+    $last_pos = 0;
+    $pos = 1;
     foreach ($all_users as $key => $val) {
+        // Skip if it's lucastdcj
+        if ($val->user_id == 736) continue;
+        if ($val->problems == 0) continue;
     	$ans[$val->user_id]['user_name'] = $val->user_name;
     	$ans[$val->user_id]['section_id'] = $val->section_id;
 	$ans[$val->user_id]['problems'] = $val->problems;    	
+	if ($val->section_id != $last_section_id || $val->problems != $last_problems) {
+	  $ans[$val->user_id]['ranking'] = $pos; 
+          $last_pos = $pos;	
+          $last_section_id = $val->section_id;
+          $last_problems = $val->problems;
+	} else {
+          $ans[$val->user_id]['ranking'] = $last_pos;
+        }
+        $pos = $pos + 1;
     }    
     return $ans;
   }  

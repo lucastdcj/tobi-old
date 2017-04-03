@@ -23,7 +23,7 @@ class ProblemModel {
     		     problem_level,
     		     problem_year,
     		     problem_phase
-    		     FROM problems WHERE section_id = :section_id";
+    		     FROM problems WHERE section_id = :section_id ORDER BY problem_name";
     $query = $this->db->prepare($sql);
     $query->execute(array(      
       ':section_id' => $section_id

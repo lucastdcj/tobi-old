@@ -19,4 +19,9 @@ class Index extends Controller {
   function index() {
     $this->view->render('index/index');
   }
+
+  function index_en() {
+    $this->view->render('index/index_en');
+  }
+
 }
